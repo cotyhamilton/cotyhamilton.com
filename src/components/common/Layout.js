@@ -39,10 +39,10 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                     <div className="container">
                         <div className="site-mast">
                             <div className="site-mast-left">
-                                <Link to="/">
+                                <Link className="site-logo-link" to="/">
                                     {site.logo ?
                                         <img className="site-logo" src={site.logo} alt={site.title} />
-                                        : <Img fixed={data.file.childImageSharp.fixed} alt={site.title} />
+                                        : <p className="site-text-logo">C</p>
                                     }
                                 </Link>
                             </div>
@@ -62,9 +62,6 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                             <div className="site-nav-left">
                                 {/* The navigation items as setup in Ghost */}
                                 <Navigation data={site.navigation} navClass="site-nav-item" />
-                            </div>
-                            <div className="site-nav-right">
-                                <Link className="site-nav-button" to="/about">About</Link>
                             </div>
                         </nav>
                     </div>
