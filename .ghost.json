@@ -1,10 +1,6 @@
 {
-  "development": {
-    "apiUrl": "http://157.245.182.93",
-    "contentApiKey": "5d67ec0c7ba8c11d01287fd5ae"
-  },
   "production": {
-    "apiUrl": "http://157.245.182.93",
-    "contentApiKey": "5d67ec0c7ba8c11d01287fd5ae"
+    "apiUrl": "https://ghost.cotyhamilton.com",
+    "contentApiKey": "f909d19f95b186b7f99b964c34"
   }
 }
