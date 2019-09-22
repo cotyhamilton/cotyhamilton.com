@@ -43,8 +43,8 @@ const Post = ({ data, location }) => {
                             </section>
                         </article>
                     </div>
-                </Layout>
                 <div class="fb-comments" data-href="https://cotyhamilton.com" data-width="100%" data-numposts="5"></div>
+                </Layout>
             </>
     )
 }
