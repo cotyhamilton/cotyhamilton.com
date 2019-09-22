@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
+import { FacebookProvider, Comments } from 'react-facebook';
 
 import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
@@ -42,6 +43,9 @@ const Post = ({ data, location }) => {
                                 />
                             </section>
                         </article>
+                        <FacebookProvider appId="531984704241704">
+                            <Comments href={`https://cotyhamilton.com/${location}`} />
+                        </FacebookProvider>
                     </div>
                 </Layout>
             </>
