@@ -1,4 +1,8 @@
 {
+  "development": {
+    "apiUrl": "https://ghost.cotyhamilton.com",
+    "contentApiKey": "f909d19f95b186b7f99b964c34"
+  },
   "production": {
     "apiUrl": "https://ghost.cotyhamilton.com",
     "contentApiKey": "f909d19f95b186b7f99b964c34"

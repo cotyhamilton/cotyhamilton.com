@@ -41,11 +41,13 @@ const Post = ({ data, location }) => {
                                     className="content-body load-external-scripts"
                                     dangerouslySetInnerHTML={{ __html: post.html }}
                                 />
+                                <FacebookProvider appId="531984704241704">
+                                    <Comments href={`https://cotyhamilton.com/${post.slug}`} />
+                                </FacebookProvider>
                             </section>
+                            
                         </article>
-                        <FacebookProvider appId="531984704241704">
-                            <Comments href={`https://cotyhamilton.com/${location}`} />
-                        </FacebookProvider>
+                        
                     </div>
                 </Layout>
             </>
@@ -59,6 +61,7 @@ Post.propTypes = {
             title: PropTypes.string.isRequired,
             html: PropTypes.string.isRequired,
             feature_image: PropTypes.string,
+            slug: PropTypes.isRequired
         }).isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,
