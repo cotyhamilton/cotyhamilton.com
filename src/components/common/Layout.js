@@ -31,8 +31,10 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
             <body className={bodyClass} />
         </Helmet>
 
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0"></script>
+            
         <div className="viewport">
-
             <div className="viewport-top">
                 {/* The main header section on top of the screen */}
                 <header className="site-head" style={{ ...site.cover_image && { backgroundImage: `url(${site.cover_image})` } }}>
