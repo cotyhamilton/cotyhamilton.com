@@ -50,7 +50,7 @@
     "gatsby-source-filesystem": "2.1.18",
     "gatsby-source-ghost": "3.4.5",
     "gatsby-transformer-sharp": "2.2.12",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "react-helmet": "5.2.1",
