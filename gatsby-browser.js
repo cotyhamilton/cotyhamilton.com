@@ -9,6 +9,9 @@
  * via ids/classnames etc.
  *
  */
+
+require("./src/styles/syntax-highlighting.css")
+
 var trustAllScripts = function () {
     var scriptNodes = document.querySelectorAll('.load-external-scripts script');
 

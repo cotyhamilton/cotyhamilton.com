@@ -1,8 +1,10 @@
 import React from 'react'
+import { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import { FacebookProvider, Comments } from 'react-facebook';
+import Prism from 'prismjs';
 
 import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
@@ -14,6 +16,11 @@ import { MetaData } from '../components/common/meta'
 *
 */
 const Post = ({ data, location }) => {
+    useEffect(() => {
+        // call the highlightAll() function to style our code blocks
+        Prism.highlightAll()
+    })
+
     const post = data.ghostPost
 
     return (
