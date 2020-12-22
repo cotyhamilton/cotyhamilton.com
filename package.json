@@ -23,7 +23,7 @@
   "scripts": {
     "serve": "gatsby build && NODE_ENV=production gatsby serve",
     "build": "gatsby build",
-    "dev": "gatsby develop",
+    "dev": "gatsby develop -H 0.0.0.0 -p 8000",
     "lint": "eslint . --ext .js --cache",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -35,6 +35,8 @@
   "dependencies": {
     "@tryghost/helpers": "1.1.35",
     "@tryghost/helpers-gatsby": "1.0.40",
+    "babel-plugin-prismjs": "^2.0.1",
+    "babel-preset-gatsby": "^0.9.0",
     "cheerio": "1.0.0-rc.3",
     "gatsby": "^2.29.1",
     "gatsby-awesome-pagination": "0.3.6",
@@ -51,6 +53,7 @@
     "gatsby-source-ghost": "4.2.2",
     "gatsby-transformer-sharp": "2.9.0",
     "lodash": "^4.17.20",
+    "prismjs": "^1.22.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-facebook": "8.1.4",
