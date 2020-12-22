@@ -3,7 +3,8 @@ import { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
-import { FacebookProvider, Comments } from 'react-facebook';
+// import { FacebookProvider, Comments } from 'react-facebook';
+import { Disqus } from 'gatsby-plugin-disqus';
 import Prism from 'prismjs';
 
 import { Layout } from '../components/common'
@@ -48,9 +49,15 @@ const Post = ({ data, location }) => {
                                     className="content-body load-external-scripts"
                                     dangerouslySetInnerHTML={{ __html: post.html }}
                                 />
-                                <FacebookProvider appId="531984704241704">
+                                {/* <FacebookProvider appId="531984704241704">
                                     <Comments href={`https://cotyhamilton.com/${post.slug}`} />
-                                </FacebookProvider>
+                                </FacebookProvider> */}
+                                <Disqus
+                                    config={{
+                                        identifier: `${post.slug}`,
+                                        title: `${post.title}`,
+                                    }}
+                                />
                             </section>
                             
                         </article>
