@@ -1,0 +1,9 @@
+{
+    "title": "coty hamilton",
+    "icon": "./attachments/icon.png",
+    "pages": [
+        "notes",
+        "notes/deno",
+        "notes/bash"
+    ]
+}
