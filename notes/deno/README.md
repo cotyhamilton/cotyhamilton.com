@@ -13,7 +13,7 @@ function trace(value: any, { kind, name }: { kind: string; name: string }) {
   if (kind === "method") {
     return function (...args: unknown[]) {
       console.log(`starting ${name} with arguments ${args.join(", ")}`);
-			// console.log(`ENTERED -- ${name} -- ${args.map(arg => JSON.stringify(arg)).join(", ")}`);
+      // console.log(`ENTERED -- ${name} -- ${args.map(arg => JSON.stringify(arg)).join(", ")}`);
       // @ts-ignore this has implicit any type
       const ret = value.call(this, ...args);
       console.log(`ending ${name}`);
