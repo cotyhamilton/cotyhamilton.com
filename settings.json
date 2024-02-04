@@ -8,11 +8,11 @@
             "sub": [
                 {
                     "icon": "🦕",
-                    "link": "deno",
+                    "link": "deno"
                 },
                 {
                     "icon": "🐢",
-                    "link": "bash",
+                    "link": "bash"
                 }
             ]
         }
