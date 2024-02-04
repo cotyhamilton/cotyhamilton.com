@@ -3,6 +3,10 @@
     "icon": "./attachments/icon.png",
     "navigation": [
         {
+            "icon": "🐳",
+            "link": "docker-buildkit-sbom-tricks"
+        },
+        {
             "icon": "💻",
             "link": "notes",
             "sub": [
