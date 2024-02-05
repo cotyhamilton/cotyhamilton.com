@@ -8,6 +8,8 @@ import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 import type { PageLoad } from "./$types";
 
+export const ssr = false;
+
 export const load = (async ({ fetch, params }) => {
 	const url = params.slug
 		? `https://raw.githubusercontent.com/cotyhamilton/blog/main/${params.slug}/README.md`
