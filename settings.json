@@ -17,6 +17,10 @@
                 {
                     "icon": "🐢",
                     "link": "bash"
+                },
+                {
+                    "icon": "☁️",
+                    "link": "azure"
                 }
             ]
         }
