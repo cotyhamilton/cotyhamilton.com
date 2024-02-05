@@ -1,5 +1,4 @@
 import type { Grammar } from "@wooorm/starry-night";
-import dockerfile from "@wooorm/starry-night/source.dockerfile";
 import type { ElementContent, Root } from "hast";
 
 interface Options {
@@ -7,6 +6,7 @@ interface Options {
 }
 
 import { common, createStarryNight } from "@wooorm/starry-night";
+import dockerfile from "@wooorm/starry-night/source.dockerfile";
 import { toString } from "hast-util-to-string";
 import { visit } from "unist-util-visit";
 
