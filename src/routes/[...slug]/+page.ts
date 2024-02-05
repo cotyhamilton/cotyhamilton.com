@@ -1,5 +1,6 @@
 import handleMatter from "$lib/rehype-matter";
 import rehypeStarryNight from "$lib/rehype-starry-night.js";
+import { error } from "@sveltejs/kit";
 import rehypeFormat from "rehype-format";
 import rehypeStringify from "rehype-stringify";
 import remarkFrontmatter from "remark-frontmatter";
@@ -16,6 +17,14 @@ export const load = (async ({ fetch, params }) => {
 		: "https://raw.githubusercontent.com/cotyhamilton/blog/main/README.md";
 
 	const res = await fetch(url);
+
+	if (!res.ok) {
+		if (res.status === 404) {
+			error(res.status, "not found");
+		} else {
+			error(500, "internal error");
+		}
+	}
 
 	const data = await unified()
 		.use(remarkParse)
