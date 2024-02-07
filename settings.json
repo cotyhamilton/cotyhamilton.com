@@ -3,6 +3,10 @@
     "icon": "./attachments/icon.png",
     "navigation": [
         {
+            "icon": "💦",
+            "title": "drizzle-in-browser"
+        },
+        {
             "icon": "🐳",
             "link": "docker-buildkit-sbom-tricks"
         },
