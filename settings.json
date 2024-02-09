@@ -25,6 +25,10 @@
                 {
                     "icon": "☁️",
                     "link": "azure"
+                },
+                {
+                    "icon": "🌩️",
+                    "link": "azure-devops"
                 }
             ]
         }
