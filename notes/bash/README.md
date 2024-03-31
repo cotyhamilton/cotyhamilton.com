@@ -1,14 +1,9 @@
----
-icon: 🐢
-title: 🐢 bash
----
-
-# bash
+# 🐢 bash
 
 ## load .env
 
 ```sh
-set -a            
+set -a
 source .env
 set +a
 ```

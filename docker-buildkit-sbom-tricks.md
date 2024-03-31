@@ -1,9 +1,4 @@
----
-icon: 🐳
-title: Docker BuildKit SBOM Tricks
----
-
-# Docker BuildKit SBOM Tricks
+# 🐳 Docker BuildKit SBOM Tricks
 
 By default the sbom produced from an image only includes dependencies from the final image. This can be inaccurate for some builds, like a frontend static app whose final image would only include bundled js in an nginx image. Here's an example `Dockerfile` for an SSR SvelteKit application, note the 3rd line `ARG BUILDKIT_SBOM_SCAN_STAGE=true` which tells BuildKit to produce an sbom for the stage.
 

@@ -1,9 +1,4 @@
----
-icon: ☁️
-title: ☁️ azure
----
-
-# azure
+# ☁️ azure
 
 ## service principals
 
