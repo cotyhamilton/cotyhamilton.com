@@ -1,9 +1,4 @@
----
-title: azure devops
-icon: 🌩️
----
-
-# azure devops
+# 🌩️ azure devops
 
 ## azure cli and terraform pipeline
 

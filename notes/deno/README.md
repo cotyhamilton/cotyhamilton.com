@@ -1,9 +1,4 @@
----
-icon: 🦕
-title: 🦕 deno
----
-
-# deno
+# 🦕 deno
 
 ## decorators
 

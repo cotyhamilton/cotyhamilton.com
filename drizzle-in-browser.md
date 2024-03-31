@@ -1,9 +1,4 @@
----
-icon: 💦
-title: Running Drizzle ORM in the Browser
----
-
-# Running Drizzle ORM in the Browser
+# 💦 Running Drizzle ORM in the Browser
 
 We're putting the database right in the browser. I'm using the cr-sqlite wasm database from [vulcan labs](https://vlcn.io), but there are many other SQLite databases that can run in the browser where this method can be used.
 
