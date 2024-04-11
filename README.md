@@ -10,4 +10,6 @@ software developer and devops engineer
 
 [💦 Running Drizzle ORM in the Browser](./drizzle-in-browser.md)
 
+[🚢 Kubernetes Cluster Setup](./cluster-setup.md)
+
 [💻 notes](./notes/README.md)
