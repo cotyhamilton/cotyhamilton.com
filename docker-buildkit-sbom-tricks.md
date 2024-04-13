@@ -38,10 +38,6 @@ The above information can be found https://www.docker.com/blog/generate-sboms-wi
 We can run an OCI registry locally to play in a sandbox.
 
 ```sh
-# make sure you've created the docker container builder with buildx
-# docker buildx create --use --name=buildkit-container --driver=docker-container
-
-# create the oci registry
 docker run -d -p 5002:5000 --name registry distribution/distribution:edge
 ```
 
@@ -50,6 +46,10 @@ docker run -d -p 5002:5000 --name registry distribution/distribution:edge
 Build and push the image to your local registry
 
 ```sh
+# make sure you've created the docker container builder with buildx
+docker buildx create --use --name=buildkit-container --driver=docker-container
+
+# build
 docker buildx build \
 	--output type=image,name=host.docker.internal:5002/test,push=true,registry.insecure=true \
 	--sbom=true .
