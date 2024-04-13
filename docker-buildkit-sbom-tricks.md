@@ -31,7 +31,7 @@ docker buildx build --sbom=true -t localhost:5002/test .
 docker buildx build --sbom=true -t localhost:5002/test -out ./image .
 ```
 
-The above information can be found https://www.docker.com/blog/generate-sboms-with-buildkit/ and https://docs.docker.com/build/attestations/sbom/. Here's the method to get the sbom from an image.
+The above information can be found https://www.docker.com/blog/generate-sboms-with-buildkit/ and https://docs.docker.com/build/attestations/sbom/.
 
 ## Test OCI Registry Attestations Locally
 
