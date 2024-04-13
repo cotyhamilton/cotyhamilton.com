@@ -203,3 +203,21 @@ EOF
 ```
 
 > ✋ change cluster-issuer to letsencrypt-prod for trusted cert
+
+## logging
+
+loki stack
+
+- loki
+- promtail
+- grafana
+
+```sh
+helm upgrade --install \
+  --namespace logging \
+  --create-namespace \
+  --set grafana.enabled=true \
+  loki grafana/loki-stack
+```
+
+https://github.com/grafana/helm-charts/blob/main/charts/loki-stack/README.md
