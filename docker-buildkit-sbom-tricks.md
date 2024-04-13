@@ -16,43 +16,68 @@ RUN yarn build
 FROM node:18-alpine AS runtime
 USER node:node
 WORKDIR /app
-COPY --from=build /app/package.json /app/entrypoint.js /app/build ./
+COPY --from=build /app/package.json /app/build ./
 EXPOSE 3000
 CMD ["./entrypoint.js"]
 ```
 
-To produce sboms add the --sbom=true option to the build command
+To produce sboms add the --sbom=true option to the `docker buildx build` command
 
 ```sh
 # build
-docker buildx build --sbom=true -t cotyhamilton/budgety .
+docker buildx build --sbom=true -t localhost:5002/test .
 
 # verify by saving filesystem to disk and browsing the spdx files
-docker buildx build --sbom=true -t cotyhamilton/budgety -out ./image .
+docker buildx build --sbom=true -t localhost:5002/test -out ./image .
 ```
 
 The above information can be found https://www.docker.com/blog/generate-sboms-with-buildkit/ and https://docs.docker.com/build/attestations/sbom/. Here's the method to get the sbom from an image.
 
+## Test OCI Registry Attestations Locally
+
+We can run an OCI registry locally to play in a sandbox.
+
 ```sh
-docker buildx imagetools inspect ghcr.io/cotyhamilton/budgety:1_2023-10-03.59.1 --format "{{ json .SBOM.SPDX }}"
+# make sure you've created the docker container builder with buildx
+# docker buildx create --use --name=buildkit-container --driver=docker-container
+
+# create the oci registry
+docker run -d -p 5002:5000 --name registry distribution/distribution:edge
 ```
 
-To get additional sboms, like from our build stage, and from multi-platform images, it's not as straightforward (especially for me, I have no idea what go templating is 😜). Here are some format templates:
+> ✋ I'm mapping the default registry port 5000 to a different port because MacOS uses port 5000
+
+Build and push the image to your local registry
+
+```sh
+docker buildx build \
+	--output type=image,name=host.docker.internal:5002/test,push=true,registry.insecure=true \
+	--sbom=true .
+```
+
+> ✋ The image tag uses host.docker.internal as the registry address because the build is running in a container
+
+You should see a line in the output that looks similar: `generating sbom using docker.io/docker/buildkit-syft-scanner:stable-1`
+
+Here are some helpful commands to interact with the sboms from the registry.
 
 ```sh
 # get all sboms
-docker buildx imagetools inspect ghcr.io/cotyhamilton/budgety:1_2023-10-03.59.1 \
-	--format '{{ json .SBOM }}'
+docker buildx imagetools inspect localhost:5002/test --format "{{ json .SBOM }}"
 
-# get the additional sboms of the linux/amd64 image
-docker buildx imagetools inspect ghcr.io/cotyhamilton/budgety:1_2023-10-03.59.1 \
-	--format '{{ json (index .SBOM "linux/amd64").AdditionalSPDXs }}'
+# get the sbom from the final image
+docker buildx imagetools inspect localhost:5002/test --format "{{ json .SBOM.SPDX }}"
 
-# get the additional sbom of the linux/amd64 image that is named sbom-build
-docker buildx imagetools inspect ghcr.io/cotyhamilton/budgety:1_2023-10-03.59.1 \
-	--format '{{ range (index .SBOM "linux/amd64").AdditionalSPDXs }}{{if eq .name "sbom-build"}}{{ json . }}{{ end }}{{ end }}'
+# get the additional sboms
+docker buildx imagetools inspect localhost:5002/test --format "{{ json .SBOM.AdditionalSPDXs }}"
 
-# print the packages in the above sbom in a human readable format (name@version)
-docker buildx imagetools inspect ghcr.io/cotyhamilton/budgety:1_2023-10-03.59.1 \
-	--format '{{ range (index .SBOM "linux/amd64").AdditionalSPDXs }}{{if eq .name "sbom-build"}}{{range .packages}}{{.name}}@{{ .versionInfo }}{{"\n"}}{{end}}{{end}}{{end}}'
+# get the sbom named 'sbom-build', named as such because of the name of the stage in the Dockerfile we scanned
+docker buildx imagetools inspect localhost:5002/test \
+	--format '{{ range .SBOM.AdditionalSPDXs }}{{if eq .name "sbom-build"}}{{ json . }}{{ end }}{{ end }}'
+
+# print 'sbom-build' in a human readable format: <software>@<version>
+docker buildx imagetools inspect localhost:5002/test \
+	--format '{{ range .SBOM.AdditionalSPDXs }}{{if eq .name "sbom-build"}}{{range .packages}}{{.name}}@{{ .versionInfo }}{{"\n"}}{{end}}{{end}}{{end}}' | sort
+
+# really helpful to realize npm and javascript dependency culture is a dumpster :D
 ```
