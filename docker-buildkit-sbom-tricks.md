@@ -21,7 +21,7 @@ EXPOSE 3000
 CMD ["node", "./index.js"]
 ```
 
-To produce sboms add the --sbom=true option to the `docker buildx build` command
+To produce sboms add the `--sbom=true` option to the `docker buildx build` command
 
 ```sh
 # build
