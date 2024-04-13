@@ -311,23 +311,4 @@ export const getTransactionById = async (id: number) => {
 };
 ```
 
-## The Bug
-
-Unfortunately the drizzle sqlite async proxy doesn't work with [drizzle queries](https://orm.drizzle.team/docs/rqb). There are issues and PRs open to fix this, you can follow the advice [here](https://github.com/drizzle-team/drizzle-orm/issues/873#issuecomment-1890754539) to patch it for your project.
-
-```ts
-// src/lib/test.ts
-
-import { db } from "$lib/db/client";
-import { transactions } from "$lib/db/schema";
-import { desc, eq } from "drizzle-orm";
-
-const getTransactions = async () => {
-  return await db.query.transactions.findMany({
-    with: { box: true },
-    orderBy: [desc(transactions.date)],
-  });
-};
-```
-
 You can check out the project I'm using this in [https://github.com/cotyhamilton/budgety](https://github.com/cotyhamilton/budgety)
