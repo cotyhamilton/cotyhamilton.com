@@ -18,7 +18,7 @@ USER node:node
 WORKDIR /app
 COPY --from=build /app/package.json /app/build ./
 EXPOSE 3000
-CMD ["./entrypoint.js"]
+CMD ["node", "./index.js"]
 ```
 
 To produce sboms add the --sbom=true option to the `docker buildx build` command
