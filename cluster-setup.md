@@ -206,17 +206,19 @@ EOF
 
 ## logging
 
-loki stack
+loki stack + prometheus
 
 - loki
 - promtail
 - grafana
+- prometheus
 
 ```sh
 helm upgrade --install \
   --namespace logging \
   --create-namespace \
   --set grafana.enabled=true \
+  --set prometheus.enabled=true \
   loki grafana/loki-stack
 ```
 
