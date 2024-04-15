@@ -95,3 +95,9 @@ In k8s version 1.19+, we can specify the –replicas option to create a deployme
 ```sh
 kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o yaml > nginx-deployment.yaml
 ```
+
+## restore a persistent volume
+
+- Ensure the pv has reclaim policy `Retain`
+- Edit the pv, delete the claim `spec.claimRef`
+- Edit or create a pvc, set `spec.volumeName` to the pv name
