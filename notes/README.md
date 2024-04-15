@@ -9,3 +9,5 @@ A scratchpad for things I forget or don't want to forget
 [🐢 bash](./bash/README.md)
 
 [🦕 deno](./deno/README.md)
+
+[🚢 kubernetes study](./kubernetes/README.md)
