@@ -173,12 +173,80 @@ spec:
                   - c
 ```
 
+> ✋ use taints and tolerations along with node affinity and selectors to ensure nodes **only** schedule **specific** pods, and pods are **only** scheduled to **certain** nodes
+
 ## resource limits
+
+Request and limit compute
+
+### container spec
+
+```yaml
+# pod-definition.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+```
+
+### limit ranges
+
+todo
+
+### resource quotas
+
+todo
 
 ## daemon sets
 
-## multiple schedulers
+Similar to ReplicaSet but runs a pod on each node
 
-## scheduler events
+```sh
+# daemonset-definition.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: monitoring
+spec:
+  template:
+    metadata:
+      name: monitoring
+      labels:
+        app: monitoring
+    containers:
+      - image: agent
+        name: agent
+  selector:
+    matchLabels:
+      app: monitoring
+```
 
-## configuration
+Use cases
+
+- monitoring and logging agents
+- kube-proxy
+
+## static pods
+
+The kubelet can schedule pods without the kube-apiserver by placing pod definitions in a specific directory. This is useful for bootstrapping control plane components as containers.
+
+Check the `/etc/kubernetes/manifests/` directory and/or the `staticPodPath` field in the kublet config file at `/var/lib/kubelet/config.yaml` (probably).
+
+Web-hosted static pod manifests are also a thing, configured with the kubelet arg `--manifest-url=<manifest-url>`.
+
+## todo
+
+### multiple schedulers
+
+### scheduler plugins
