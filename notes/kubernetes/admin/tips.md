@@ -101,3 +101,60 @@ kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o y
 - Ensure the pv has reclaim policy `Retain`
 - Edit the pv, delete the claim `spec.claimRef`
 - Edit or create a pvc, set `spec.volumeName` to the pv name
+
+## local persistent volumes
+
+> 🎉 supports RWX
+
+- [storage class](https://kubernetes.io/docs/concepts/storage/storage-classes/#local)
+- [volume](https://kubernetes.io/docs/concepts/storage/volumes/#local)
+
+Limitations
+
+- single node only (schedule pods on the same node)
+- no dynamic provisioning, create the pv manually
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: foo-pvc
+spec:
+  storageClassName: local-storage
+  volumeName: foo-pv
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: foo-pv
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /mnt/storage/foo-pv
+  nodeAffinity: # affinity is required
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - worker-01
+```
