@@ -55,9 +55,10 @@ spec:
       labels:
         app: nginx # !
         tier: web
-    containers:
-      - image: nginx
-        name: nginx
+    spec:
+      containers:
+        - image: nginx
+          name: nginx
   replicas: 2
 ```
 
