@@ -26,3 +26,38 @@ class C {
 
 new C().m(1);
 ```
+
+## web workers
+
+```ts
+import { delay } from "jsr:@std/async";
+
+function main() {
+    const worker = new Worker(import.meta.resolve("./test.ts"), {
+        name: "hello-worker",
+        type: "module",
+    });
+    worker.onmessage = (e: MessageEvent<{ message: string }>) => {
+        console.log(e.data.message);
+    };
+    delay(3000).then(() => {
+        worker.postMessage({
+            message: "hello",
+        });
+    });
+}
+
+if (import.meta.main) {
+    if (self.window) {
+        main();
+    } else {
+        const worker = self as unknown as Worker & { name?: string };
+        worker.onmessage = (e: MessageEvent<{ message: string }>) => {
+            worker.postMessage({
+                message: `${e.data.message} from ${worker.name}`,
+            });
+            self.close();
+        };
+    }
+}
+```
